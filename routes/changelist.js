@@ -11,7 +11,7 @@
 
 var fs = require('fs'),
     stringTemplate = require('string-template'),
-    configuration = JSON.parse(fs.readFileSync('configuration.json'));
+    configuration = require('../configuration.json');
 
 var express = require('express'),
     mongoose = require('mongoose'),

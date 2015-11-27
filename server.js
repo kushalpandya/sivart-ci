@@ -10,7 +10,7 @@
  */
 
 var fs = require('fs'),
-    configuration = JSON.parse(fs.readFileSync('configuration.json'));
+    configuration = require('./configuration.json');
 
 var sivartApp = require('./app');
 
