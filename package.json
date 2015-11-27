@@ -1,0 +1,45 @@
+{
+  "name": "sivart-ci",
+  "version": "0.1.0",
+  "description": "A Responsive CI Dashboard",
+  "homepage": "https://github.com/kushalpandya/sivart-ci",
+  "author": "Kushal Pandya <kushalspandya@gmail.com> (https://doublslash.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kushalpandya/sivart-ci.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kushalpandya/sivart-ci/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/kushalpandya/sivart-ci/blob/master/LICENSE"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "javascript",
+    "ci",
+    "angularjs"
+  ],
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "grunt": "^0.4.5",
+    "grunt-contrib-compass": "^1.0.4",
+    "mocha": "^2.3.4"
+  },
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "method-override": "^2.3.5",
+    "mongoose": "^4.2.8",
+    "morgan": "^1.6.1"
+  }
+}
