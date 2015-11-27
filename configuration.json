@@ -1,0 +1,15 @@
+{
+    "sivart": {
+        "publicDir": "/public",
+        "serverPort": "4000"
+    },
+    "morgan": {
+        "logType": "dev"
+    },
+    "modulus": {
+        "protocol": "mongodb",
+        "dbURL": "apollo.modulusmongo.net:27017/pyh2ixyX",
+        "dbUserName": "sivart",
+        "dbPassword": "root"
+    }
+}
