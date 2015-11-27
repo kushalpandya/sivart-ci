@@ -14,7 +14,7 @@
  */
 var fs = require('fs'),
     stringTemplate = require('string-template'),
-    configuration = JSON.parse(fs.readFileSync('configuration.json'));
+    configuration = require('./configuration.json');
 
 /*
  * Load Modules.
@@ -27,6 +27,7 @@ var express = require('express'),
  * Init App Modules
  */
 var changelistModel = require('./model/changelist'),
+    indexRoutes = require('./routes/index'),
     changelistRoutes = require('./routes/changelist'),
     sivartApp;
 
@@ -39,6 +40,7 @@ mongoose.connect(stringTemplate('{protocol}://{dbUserName}:{dbPassword}@{dbURL}'
 sivartApp.use(express.static(__dirname + configuration.sivart.publicDir));
 sivartApp.use(morgan(configuration.morgan.logType));
 
+sivartApp.use('/', indexRoutes);
 sivartApp.use('/api', changelistRoutes);
 
 module.exports = sivartApp;
