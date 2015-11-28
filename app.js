@@ -12,8 +12,7 @@
 /*
  * Load Configurations and Utilities.
  */
-var fs = require('fs'),
-    stringTemplate = require('string-template'),
+var stringTemplate = require('string-template'),
     configuration = require('./configuration.json');
 
 /*
@@ -29,6 +28,7 @@ var express = require('express'),
 var changelistModel = require('./model/changelist'),
     indexRoutes = require('./routes/index'),
     changelistRoutes = require('./routes/changelist'),
+    changelistMonitor = require('./services/changelistmonitor'),
     sivartApp;
 
 /*
@@ -42,5 +42,6 @@ sivartApp.use(morgan(configuration.morgan.logType));
 
 sivartApp.use('/', indexRoutes);
 sivartApp.use('/api', changelistRoutes);
+sivartApp.changelistMonitor = changelistMonitor;
 
 module.exports = sivartApp;
