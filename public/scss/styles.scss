@@ -100,6 +100,125 @@ body {
     }
 }
 
+.show-menu {
+    font-size: 18px;
+
+    @include hover;
+}
+
+.changelist {
+    width: 100%;
+    margin-top: 20px;
+    padding-left: 0;
+    list-style: none;
+
+    .changelist-prop {
+        display: inline-block;
+        float: left;
+    }
+
+    .list-header,
+    .list-item {
+        @include clearfix;
+
+        .changelist-prop {
+            background: white;
+        }
+
+        .changelist-title {
+            width: 15%;
+        }
+
+        .changelist-owner,
+        .changelist-status {
+            width: 12.5%;
+        }
+
+        .changelist-timestart {
+            width: 15%;
+        }
+    }
+
+    .list-empty {
+        @include clearfix;
+
+        .changelist-empty {
+            width: 100%;
+            padding: 10px 12px;
+            text-align: center;
+            background: white;
+            color: #999;
+        }
+    }
+
+    .list-header {
+        border-color: $gray;
+        border-style: solid;
+        border-width: 2px 2px 0 6px;
+
+        .changelist-prop {
+            padding: 10px 12px;
+            font-weight: bold;
+            text-align: center;
+            color: #6D6D6D;
+        }
+
+        .changelist-build,
+        .changelist-unittest,
+        .changelist-functionaltest {
+            width: 15%;
+        }
+    }
+
+    .list-item {
+        border-top: 1px solid $gray;
+
+        @mixin highlight-style($color: transparent) {
+            border-left: 6px solid $color;
+
+            .changelist-prop.changelist-status {
+                color: $color;
+            }
+        }
+
+        &.item-pending {
+            @include highlight-style($status_pending);
+        }
+
+        &.item-active {
+            @include highlight-style($status_active);
+        }
+
+        &.item-pass {
+            @include highlight-style($status_pass);
+        }
+
+        &.item-fail {
+            @include highlight-style($status_fail);
+        }
+
+        .changelist-prop {
+            padding: 15px 12px;
+            text-align: center;
+            font-size: 12px;
+            color: #989898;
+
+            &.changelist-timestart {
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .glyphicon {
+                margin: 0 5px;
+            }
+        }
+
+        .changelist-build-progress {
+            width: 45%;
+        }
+    }
+}
+
 /**
  * Smartphones Portrait Mode.
  */
@@ -148,7 +267,7 @@ body {
         padding: 20px;
         position: relative;
 
-        #menu-toggle {
+        .show-menu {
             display: none;
         }
     }
