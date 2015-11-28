@@ -11,6 +11,14 @@
 
 $(document).ready(function() {
     var pageLocation = window.location,
-        socketListenerPort = 4000,
-        socket = io.connect(pageLocation.protocol + '//' + pageLocation.hostname + ':3000');
+        socketListenerPort = 3000,
+        btnShowMenu = $('#btnShowMenu'),
+        socket;
+
+    socket = io.connect(pageLocation.protocol + '//' + pageLocation.hostname + ':' + socketListenerPort);
+
+    btnShowMenu.on('click', function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
 });
