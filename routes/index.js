@@ -9,8 +9,7 @@
  * Web Access Routes.
  */
 
-var fs = require('fs'),
-    stringTemplate = require('string-template'),
+var stringTemplate = require('string-template'),
     configuration = require('../configuration.json');
 
 var express = require('express'),
