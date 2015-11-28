@@ -9,10 +9,13 @@
  * Sivart Server Script.
  */
 
-var fs = require('fs'),
-    configuration = require('./configuration.json');
+var configuration = require('./configuration.json');
 
-var sivartApp = require('./app');
+var sivartApp = require('./app'),
+    sivartSocketServer = sivartApp.changelistMonitor(sivartApp);
 
-sivartApp.listen(configuration.sivart.serverPort);
-console.log("sivart-ci started on port : ", configuration.sivart.serverPort);
+sivartApp.listen(configuration.sivart.httpPort);
+sivartSocketServer.listen(configuration.sivart.socketPort, function() {
+    console.log("sivart-ci socket server started on port : ", configuration.sivart.socketPort);
+});
+console.log("sivart-ci started on port : ", configuration.sivart.httpPort);
