@@ -9,6 +9,8 @@
  * Sivart Main Script.
  */
 
-$(function() {
-    alert('Dom ready');
-})();
+$(document).ready(function() {
+    var pageLocation = window.location,
+        socketListenerPort = 4000,
+        socket = io.connect(pageLocation.protocol + '//' + pageLocation.hostname + ':3000');
+});
