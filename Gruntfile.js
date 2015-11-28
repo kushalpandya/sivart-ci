@@ -69,11 +69,23 @@ module.exports = function(grunt) {
             clean: {
                 options: fnMergeConfig(compassDirConfig, { clean: true })
             }
+        },
+
+        uglify: {
+            options: {
+                mangle: true
+            },
+            scripts: {
+                files: {
+                    'public/js/dist/script.min.js': ['public/js/src/script.js']
+                }
+            }
         }
     });
 
     /* Load tasks */
 	grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     /* Register tasks */
 
@@ -100,5 +112,5 @@ module.exports = function(grunt) {
      * 1) Cleans generated CSS and images (compass:clean).
      * 2) Recompiles all SCSS files into CSS (compass:dist).
      */
-    grunt.registerTask('build', ['compass:clean', 'compass:dist']);
+    grunt.registerTask('build', ['compass:clean', 'compass:dist', 'uglify:scripts']);
 };
