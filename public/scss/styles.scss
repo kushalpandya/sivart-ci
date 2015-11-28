@@ -86,11 +86,11 @@ body {
 
     > .sidebar-brand {
         height: 65px;
-        font-size: 18px;
+        font-size: 26px;
         line-height: 60px;
 
         a {
-            color: #999;
+            color: $ceramic_white;
 
             &:hover {
                 color: $ceramic_white;
