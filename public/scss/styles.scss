@@ -11,3 +11,145 @@
 
 @import "compass";
 @import "util/Mixins";
+@import "util/Colors";
+
+body {
+    background-color: $ceramic_white;
+}
+
+#wrapper {
+    padding-left: 0;
+    @include transition(all 0.5s ease);
+
+    &.toggled {
+        padding-left: 250px;
+
+        #sidebar-wrapper {
+            width: 250px;
+        }
+
+        #page-content-wrapper {
+            position: absolute;
+            margin-right: -250px;
+        }
+    }
+}
+
+#sidebar-wrapper {
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: $blue_1;
+    z-index: 1000;
+
+    @include transition(all 0.5s ease);
+}
+
+#page-content-wrapper {
+    position: absolute;
+    width: 100%;
+    padding: 15px;
+}
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+        text-indent: 20px;
+        line-height: 40px;
+
+        a {
+           display: block;
+           text-decoration: none;
+           color: $ceramic_white;
+
+            &:hover {
+                text-decoration: none;
+                color: #fff;
+                background: $blue_3;
+            }
+
+            &:active,
+            &:focus {
+                text-decoration: none;
+            }
+        }
+    }
+
+    > .sidebar-brand {
+        height: 65px;
+        font-size: 18px;
+        line-height: 60px;
+
+        a {
+            color: #999;
+
+            &:hover {
+                color: $ceramic_white;
+                background: none;
+            }
+        }
+    }
+}
+
+/**
+ * Smartphones Portrait Mode.
+ */
+@media screen and (max-width: 24.0625em) {
+}
+
+/**
+ * Smartphones Landscape.
+ */
+@media screen and (min-width: 24.125em) and (max-width: 71.9374em) {
+}
+
+/**
+ * Tablet Landscape and Portrait Mode.
+ */
+@media screen and (min-width: 46.876em) and (max-width: 71.9374em) {
+}
+
+/**
+ * Large Screens and Beyond.
+ */
+@media screen and (min-width: 71.9375em) {
+
+    #wrapper {
+        padding-left: 250px;
+
+        &.toggled {
+            padding-left: 0;
+
+            #sidebar-wrapper {
+                width: 0;
+            }
+
+            #page-content-wrapper {
+                position: relative;
+                margin-right: 0;
+            }
+        }
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+
+        #menu-toggle {
+            display: none;
+        }
+    }
+}
