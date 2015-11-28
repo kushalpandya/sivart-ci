@@ -67,7 +67,7 @@ module.exports = function(grunt) {
                 options: fnMergeConfig(compassDirConfig, { outputStyle: 'compressed' })
             },
             clean: {
-                options: fnMergeConfig(dirConfig, { clean: true })
+                options: fnMergeConfig(compassDirConfig, { clean: true })
             }
         }
     });
