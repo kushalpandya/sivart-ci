@@ -1,0 +1,119 @@
+/**
+ * sivart-ci v0.1.0
+ *
+ * A simple interactive CI Dashboard built on MEAN stack.
+ *
+ * Author: Kushal Pandya <kushalspandya@gmail.com> (https://doublslash.com)
+ * Date: 28 November, 2015
+ *
+ * SASS Mixins.
+ */
+
+/*
+ * Clearfix for floating element containers.
+ */
+@mixin clearfix($display: inherit) {
+
+	@if $display != inherit
+	{
+		display: $display;
+	}
+
+	&:after {
+		content: ".";
+		display: block;
+		height: 0;
+		clear: both;
+		visibility: hidden;
+	}
+
+	* html & {
+		height: 1px;
+	}
+}
+
+@mixin inline($float: none) {
+	display: inline-block;
+    *display: inline;
+    zoom: 1;
+
+    @if $float == left
+    {
+    	float: left;
+    }
+    @else if $float == right
+    {
+    	float: right;
+    }
+}
+
+@mixin hover($cursor: pointer) {
+	&:hover {
+		cursor: $cursor;
+	}
+}
+
+/*
+ * Vendor prefixed Box Shadow.
+ */
+@mixin box-shadow($shadow...) {
+	-webkit-box-shadow: $shadow;
+	   -moz-box-shadow: $shadow;
+	        box-shadow: $shadow;
+}
+
+/*
+ * Vendor prefixed Border Radius.
+ */
+@mixin border-radius($radius...) {
+	-webkit-border-radius: $radius;
+	   -moz-border-radius: $radius;
+	        border-radius: $radius;
+}
+
+/*
+ * Vendor prefixed Linear Gradient.
+ */
+@mixin linear-gradient($base, $top, $bottom, $bgImage: none) {
+	background-color: $base; /* Old browsers */
+
+	background-image: $bgImage;
+	background-image: -webkit-linear-gradient(top,  $top 0%, $bottom 100%); /* Chrome10+,Safari5.1+ */
+    background-image:    -moz-linear-gradient(top,  $top 0%, $bottom 100%); /* FF3.6+ */
+    background-image:     -ms-linear-gradient(top,  $top 0%, $bottom 100%); /* IE10+ */
+    background-image:      -o-linear-gradient(top,  $top 0%, $bottom 100%); /* Opera 11.10+ */
+    background-image:        -webkit-gradient(linear, left top, left bottom, color-stop(0%, $top), color-stop(100%, $bottom)); /* Chrome,Safari4+ */
+    background-image:         linear-gradient(to bottom,  $top 0%, $bottom 100%); /* W3C */
+}
+
+/*
+ * Vendor prefixed Transitions.
+ */
+@mixin transition($args...) {
+	-webkit-transition: $args;
+	   -moz-transition: $args;
+	    -ms-transition: $args;
+	     -o-transition: $args;
+	        transition: $args;
+}
+
+/*
+ * Vendor prefixed Box Sizing.
+ */
+@mixin box-sizing($args...) {
+	-webkit-box-sizing: $args;
+       -moz-box-sizing: $args;
+        -ms-box-sizing: $args;
+            box-sizing: $args;
+}
+
+/*
+ * vendor specific vertical align.
+ */
+@mixin vertical-align($top: 50%) {
+    position: relative;
+    top: $top;
+    -webkit-transform: translateY(-$top);
+        -ms-transform: translateY(-$top);
+            transform: translateY(-$top);
+}
