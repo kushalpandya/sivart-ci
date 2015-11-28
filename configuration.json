@@ -1,7 +1,8 @@
 {
     "sivart": {
         "publicDir": "/public",
-        "serverPort": "4000"
+        "httpPort": "4000",
+        "socketPort": "3000"
     },
     "morgan": {
         "logType": "dev"
