@@ -1,0 +1,136 @@
+/**
+ * sivart-ci v0.1.0
+ *
+ * A simple interactive CI Dashboard built on MEAN stack.
+ *
+ * Author: Kushal Pandya <kushalspandya@gmail.com> (https://doublslash.com)
+ * Date: 28 November, 2015
+ *
+ * Simple Sidebar Bootstrap Theme (https://github.com/IronSummitMedia/startbootstrap-simple-sidebar).
+ */
+
+ @import "compass";
+ @import "../util/Mixins";
+ @import "../util/Colors";
+
+#wrapper {
+    padding-left: 0;
+    @include transition(all 0.5s ease);
+
+ &.toggled {
+    padding-left: 250px;
+
+        #sidebar-wrapper {
+            width: 250px;
+        }
+
+        #page-content-wrapper {
+            position: absolute;
+            margin-right: -250px;
+        }
+    }
+}
+
+#sidebar-wrapper {
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: $blue_1;
+    z-index: 1000;
+
+    @include transition(all 0.5s ease);
+}
+
+#page-content-wrapper {
+    position: absolute;
+    width: 100%;
+    padding: 15px;
+}
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+            text-indent: 20px;
+            line-height: 40px;
+
+            a {
+                display: block;
+                text-decoration: none;
+                color: $ceramic_white;
+
+            &:hover {
+                text-decoration: none;
+                color: white;
+                background: $blue_3;
+            }
+
+            &:active,
+            &:focus {
+                text-decoration: none;
+            }
+        }
+    }
+
+    > .sidebar-brand {
+        height: 65px;
+        font-size: 26px;
+        line-height: 60px;
+
+        a {
+            color: $ceramic_white;
+
+            &:hover {
+                color: $ceramic_white;
+                background: none;
+            }
+        }
+    }
+}
+
+.show-menu {
+    font-size: 18px;
+
+    @include hover;
+}
+
+@media screen and (min-width: 71.9375em) {
+
+    #wrapper {
+        padding-left: 250px;
+
+        &.toggled {
+            padding-left: 0;
+
+            #sidebar-wrapper {
+                width: 0;
+            }
+
+            #page-content-wrapper {
+                position: relative;
+                margin-right: 0;
+            }
+        }
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+
+        .show-menu {
+            display: none;
+        }
+    }
+}
