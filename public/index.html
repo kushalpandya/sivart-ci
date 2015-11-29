@@ -43,26 +43,58 @@
                         <h2>Sivart CI - Dashboard</h1>
                     </div>
                     <div class="col-lg-12">
-                        <ul class="changelist">
-                            <li class="list-header">
-                                <span class="changelist-prop changelist-title">Changelist</span>
-                                <span class="changelist-prop changelist-owner">Owner</span>
-                                <span class="changelist-prop changelist-timestart">Time Started</span>
-                                <span class="changelist-prop changelist-build">Build</span>
-                                <span class="changelist-prop changelist-unittest">Unit Test</span>
-                                <span class="changelist-prop changelist-functionaltest">Functional Test</span>
-                                <span class="changelist-prop changelist-status">Status</span>
-                            </li>
-                            <li class="list-item {{ getInitialStatusClass(changelist.activity.status) }}" ng-repeat-start="changelist in changelistItems" ng-repeat-end>
-                                <span class="changelist-prop changelist-title">{{ changelist.changeListName }}</span>
-                                <span class="changelist-prop changelist-owner">{{ changelist.owner }}</span>
-                                <span class="changelist-prop changelist-timestart" ng-bind-html="getTimeStarted(changelist.timeStarted)"></span>
-                                <span class="changelist-prop changelist-build-progress">Awesome Scrollbar goes here.</span>
-                                <span class="changelist-prop changelist-status" ng-bind-html="getStatus(changelist.activity.status)"></span>
-                            </li>
-                            <li class="list-empty" ng-show="!changelistItems.length">
-                                <span class="changelist-prop changelist-empty">No Changelists Available</span>
-                            </li>
+                        <table class="changelist">
+                            <thead>
+                                <tr class="list-header">
+                                    <th class="changelist-prop changelist-title">Changelist</th>
+                                    <th class="changelist-prop changelist-owner">Owner</th>
+                                    <th class="changelist-prop changelist-timestart">Time Started</th>
+                                    <th class="changelist-prop changelist-build">Build</th>
+                                    <th class="changelist-prop changelist-unittest">Unit Test</th>
+                                    <th class="changelist-prop changelist-functionaltest">Functional Test</th>
+                                    <th class="changelist-prop changelist-status">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="{{ changelist._id }}"
+                                    class="list-item {{ getInitialStatusClass(changelist.activity.status) }}"
+                                    ng-repeat-start="changelist in changelistItems"
+                                    ng-click="onChangelistItemClick(changelist._id);"
+                                    on-finish-render="onChangelistReady()">
+                                    <td class="changelist-prop changelist-title">{{ changelist.changeListName }}</td>
+                                    <td class="changelist-prop changelist-owner">{{ changelist.owner }}</td>
+                                    <td class="changelist-prop changelist-timestart" ng-bind-html="getTimeStarted(changelist.timeStarted)"></td>
+                                    <td class="changelist-prop changelist-build-progress" colspan="3">
+                                        <div class="step-bar-progress">
+                                            <ul class="progress-steps">
+                                                <li class="step-item step-first step-pending buildStep">
+                                                    <span class="step-icon step-icon-pending glyphicon"></span>
+                                                </li>
+                                                <li class="step-item step-middle step-empty utStep">
+                                                    <span class="step-icon glyphicon"></span>
+                                                </li>
+                                                <li class="step-item step-last step-empty ftStep">
+                                                    <span class="step-icon glyphicon"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td class="changelist-prop changelist-status" ng-bind-html="getStatus(changelist.activity.status)"></td>
+                                </tr>
+                                <tr id="{{ changelist._id }}-details" class="list-item-details {{ getInitialStatusClass(changelist.activity.status) }}">
+                                    <td colspan="6">
+                                        <div class="changelist-details">
+                                            <span class="details-field build-status" ng-bind-html="getBuildStatus(changelist.activity.status, changelist.build.timeCompleted)"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="list-item-seperator" ng-repeat-end>
+                                    <td colspan="7"></td>
+                                </tr>
+                                <tr class="list-empty" ng-show="!changelistItems.length">
+                                    <td class="changelist-prop changelist-empty" colspan="7">No Changelists Available</td>
+                                </tr>
+                            </tbody>
                         </ul>
                     </div>
                 </div>
