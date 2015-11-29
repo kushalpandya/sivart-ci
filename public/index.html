@@ -36,7 +36,7 @@
             </ul>
         </div>
         <div id="page-content-wrapper">
-            <span id="btnShowMenu" class="show-menu glyphicon glyphicon-menu-hamburger"></span>
+            <span id="btnShowMenu" class="show-menu glyphicon glyphicon-menu-hamburger" ng-click="onShowMenu();"></span>
             <div class="container-fluid">
                 <div class="row" ng-show="tab == 1">
                     <div class="col-lg-12">
@@ -85,6 +85,15 @@
                                     <td colspan="6">
                                         <div class="changelist-details">
                                             <span class="details-field build-status" ng-bind-html="getBuildStatus(changelist.activity.status, changelist.build.timeCompleted)"></span>
+                                            <span class="details-field build-directories" ng-bind-html="getBuildDirectories(changelist.activity.status)"></span>
+                                            <span class="details-field build-seperator">
+                                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                            </span>
+                                            <span class="details-field build-ut-status" ng-bind-html="getTestBuildStatus(changelist.activity, changelist.unitTest, 'ut')"></span>
+                                            <span class="details-field build-seperator">
+                                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                            </span>
+                                            <span class="details-field build-ut-status" ng-bind-html="getTestBuildStatus(changelist.activity, changelist.functionalTest, 'ft')"></span>
                                         </div>
                                     </td>
                                 </tr>
@@ -92,15 +101,24 @@
                                     <td colspan="7"></td>
                                 </tr>
                                 <tr class="list-empty" ng-show="!changelistItems.length">
-                                    <td class="changelist-prop changelist-empty" colspan="7">No Changelists Available</td>
+                                    <td class="changelist-prop changelist-empty" colspan="7">Loading Changelists... Please wait.</td>
                                 </tr>
                             </tbody>
-                        </ul>
+                        </table>
                     </div>
                 </div>
                 <div class="row" ng-show="tab == 2">
                     <div class="col-lg-12">
-                        <h3>This app is made by Kushal!</h3>
+                        <h2>Sivart CI</h2>
+                        <h3>A Body-less Head-only CI Dashboard built with <a href="http://mean.io/" target="_blank">MEAN</a> stack and <a href="http://socket.io/" target="_blank">Socket.IO</a> for Realtime monitoring.</h3>
+                        <ul class="author-info">
+                            <li class="author">Created By:</li>
+                            <li class="author-title">Kushal Pandya</li>
+                            <li class="author-designation">Senior Software Engineer at <a href="http://www.saba.com/us/" target="_blank">Saba</a></li>
+                            <li class="author-links"><a href="https://doublslash.com">doublslash.com</a></li>
+                            <li class="author-links"><a href="https://github.com/kushalpandya?tab=repositories" target="_blank">GitHub</a></li>
+                            <li class="author-links"><a href="https://in.linkedin.com/in/kushalpandya" target="_blank">LinkedIn</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
