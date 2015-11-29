@@ -72,6 +72,10 @@
             }, 1);
         };
 
+        $scope.onShowMenu = function() {
+            $("#wrapper").toggleClass("toggled");
+        };
+
         $scope.onChangelistItemClick = function(changelistId) {
             var changelistEl = $('#' + changelistId),
                 changelistDetailsEl = $('#' + changelistId + '-details').find('.changelist-details');
@@ -84,6 +88,11 @@
                     changelistEl.addClass('expanded');
                     changelistEl.find('.changelist-status').attr('rowspan', 2);
                     changelistDetailsEl.slideDown('fast');
+
+                    changelistDetailsEl.find('.css-pie').each(function(e) {
+                    	var p = $(this).text();
+                    	$(this)[0].style.animationDelay = '-' + parseFloat(p) + 's';
+                    });
                 }
                 else
                 {
@@ -157,6 +166,82 @@
             return $sce.trustAsHtml(buildStatusEl);
         };
 
+        $scope.getBuildDirectories = function(status) {
+            var releaseDirEl,
+                buildDirEl =    '<span class="directory-build">' +
+                                    '<span class="glyphicon glyphicon-folder-close"></span>' +
+                                    '<a href="#">debug</a>' +
+                                '</span>';
+
+            if (status > 0)
+            {
+                releaseDirEl = '<span class="directory-release">' +
+                                    '<span class="glyphicon glyphicon-folder-close"></span>' +
+                                    '<a href="#">release</a>' +
+                                '</span>';
+            }
+            else
+            {
+                releaseDirEl = '<span class="directory-release">' +
+                                    '<span class="glyphicon glyphicon-folder-open"></span>' +
+                                    '<a href="#">release</a>' +
+                                    '<a href="#"><span class="glyphicon glyphicon-save"></span>get logs</a>' +
+                                '</span>';
+            }
+
+            return $sce.trustAsHtml(buildDirEl + releaseDirEl);
+        };
+
+        $scope.getTestBuildStatus = function(activity, tests, testType) {
+            var testName = testType === 'ut' ? 'Unit Test' : 'Functional Test',
+                targetPhase = testType === 'ut' ? 2 : 3,
+                buildMetaEl = '',
+                buildChartEl = '',
+                buildChartLegendEl = '',
+                testScore;
+
+            if (activity.status > 0)
+            {
+                if (activity.phase > (targetPhase - 1))
+                {
+                    testScore = Math.round(tests.passCount / tests.total * 100) + '%';
+
+                    buildMetaEl = '<span class="test-meta">' +
+                                        '<span class="test-status">' +
+                                            testName +
+                                            '<span class="glyphicon glyphicon-ok-sign"></span>' +
+                                        '</span>' +
+                                        '<span class="test-score">' +
+                                            testScore +
+                                        '</span>' +
+                                    '</span>';
+
+                    buildChartEl = '<div class="css-pie">' + testScore + '</div>';
+
+                    buildChartLegendEl = '<ul class="chart-legend">' +
+                                            '<li class="total-tests">' + tests.total + '</li>' +
+                                            '<li class="failed-tests">' + (tests.total - tests.passCount) + '</li>' +
+                                            '<li class="test-duration glyphicon glyphicon-time">' + this.getDuration(tests.duration) + '</li>' +
+                                         '</ul>';
+                }
+            }
+            else
+            {
+                buildMetaEl = '<span class="test-meta">' +
+                                    '<span class="test-status">' +
+                                        testName +
+                                        '<span class="glyphicon glyphicon glyphicon-remove-sign"></span>' +
+                                    '</span>' +
+                                    '<span class="test-score">0%</span>'+
+                                    '<span class="test-reason">' +
+                                        'Status: <span class="cause-message">Can\'t Run</span>' +
+                                    '</span>' +
+                                '</span>';
+            }
+
+            return $sce.trustAsHtml(buildMetaEl + buildChartEl + buildChartLegendEl);
+        };
+
         $scope.getInitialStatusClass = function(status) {
             var statusMap = {
                 "-1": "item-fail",
@@ -177,6 +262,14 @@
             return hh + ':' + mm + ' ' + ampm;
         };
 
+        $scope.getDuration = function(milliseconds) {
+            var sec = Math.round((milliseconds / 1000) % 60),
+                min = Math.round((milliseconds / (1000 * 60)) % 60),
+                hours = Math.round((milliseconds / (1000 * 60 * 60)) % 24);
+
+            return hours + ':' + min + ':' + sec;
+        };
+
         $scope.initSocket = function() {
             var i;
 
@@ -190,26 +283,36 @@
                 }, i * 1000, true, $scope.changelistItems[i - 1]._id);
             }
 
-            socket.on('buildstart', function(changelistId) {
+            socket.on('buildstart', function(changelistId, timeStarted) {
                 var changeListItemEl = $('tr#' + changelistId),
-                    buildStepEl = $('tr#' + changelistId).find('.progress-steps .buildStep');
+                    buildStepEl = $('tr#' + changelistId).find('.progress-steps .buildStep'),
+                    changeListItem;
+
                 console.log('Build started for Changelist ', $scope.changelistItems.findChangelist('_id', changelistId).changeListName);
 
-                $scope.changelistItems.findChangelist('_id', changelistId).activity.status = 2;
+                changeListItem = $scope.changelistItems.findChangelist('_id', changelistId);
+                changeListItem.timeStarted = timeStarted;
+                changeListItem.activity.status = 2;
                 buildStepEl.removeClass('step-pending').addClass('step-active');
                 buildStepEl.find('.step-icon').removeClass('step-icon-pending').addClass('step-icon-active');
             });
 
-            socket.on('buildfinished', function(changelistId, status) {
+            socket.on('buildfinished', function(changelistId, status, timeCompleted) {
                 var changeListItemEl = $('tr#' + changelistId),
-                    buildStepEl = changeListItemEl.find('.progress-steps .buildStep');
+                    buildStepEl = changeListItemEl.find('.progress-steps .buildStep'),
+                    changeListItem;
+
                 console.log('Build finished for Changelist ', $scope.changelistItems.findChangelist('_id', changelistId).changeListName, ' with status ', status);
+
+                changeListItem = $scope.changelistItems.findChangelist('_id', changelistId);
+                changeListItem.activity.phase = 1;
+                changeListItem.build.timeCompleted = timeCompleted;
 
                 if (status === 1)
                     buildStepEl.find('.step-icon').removeClass('step-icon-active').addClass('step-icon-pass');
                 else
                 {
-                    $scope.changelistItems.findChangelist('_id', changelistId).activity.status = status;
+                    changeListItem.activity.status = status;
                     buildStepEl.removeClass('step-active').addClass('step-fail');
                     buildStepEl.find('.step-icon').removeClass('step-icon-active').addClass('step-icon-fail');
                 }
@@ -229,16 +332,23 @@
                 }, 1000);
             });
 
-            socket.on('unittestfinished', function(changelistId, status) {
+            socket.on('unittestfinished', function(changelistId, status, timeCompleted, passCount) {
                 var changeListItemEl = $('tr#' + changelistId),
                     buildStepEl = changeListItemEl.find('.progress-steps .buildStep'),
-                    utStepEl = changeListItemEl.find('.progress-steps .utStep');
+                    utStepEl = changeListItemEl.find('.progress-steps .utStep'),
+                    changeListItem;
+
+                changeListItem = $scope.changelistItems.findChangelist('_id', changelistId);
+                changeListItem.activity.phase = 2;
+                changeListItem.unitTest.duration = timeCompleted - changeListItem.timeStarted;
+                changeListItem.unitTest.passCount = passCount;
+                changeListItem.build.timeCompleted = timeCompleted;
 
                 if (status === 1)
                     utStepEl.find('.step-icon').removeClass('step-icon-active').addClass('step-icon-pass');
                 else
                 {
-                    $scope.changelistItems.findChangelist('_id', changelistId).activity.status = status;
+                    changeListItem.activity.status = status;
                     utStepEl.removeClass('step-active').addClass('step-fail');
                     buildStepEl.removeClass('step-active fill-step-progress').addClass('step-fail fill-step-progress');
                     $timeout(function() {
@@ -260,15 +370,22 @@
                 }, 1000);
             });
 
-            socket.on('functionaltestfinished', function(changelistId, status) {
+            socket.on('functionaltestfinished', function(changelistId, status, timeCompleted, passCount) {
                 var changeListItemEl = $('tr#' + changelistId),
                     buildStepEl = changeListItemEl.find('.progress-steps .buildStep'),
                     utStepEl = changeListItemEl.find('.progress-steps .utStep'),
-                    ftStepEl = changeListItemEl.find('.progress-steps .ftStep');
+                    ftStepEl = changeListItemEl.find('.progress-steps .ftStep'),
+                    changeListItem;
+
+                changeListItem = $scope.changelistItems.findChangelist('_id', changelistId);
+                changeListItem.activity.status = status;
+                changeListItem.activity.phase = 3;
+                changeListItem.functionalTest.duration = timeCompleted - changeListItem.timeStarted;
+                changeListItem.functionalTest.passCount = passCount;
+                changeListItem.build.timeCompleted = timeCompleted;
 
                 if (status === 1)
                 {
-                    $scope.changelistItems.findChangelist('_id', changelistId).activity.status = status;
                     buildStepEl.removeClass('step-active fill-step-progress').addClass('step-pass fill-step-progress');
                     utStepEl.removeClass('step-active fill-step-progress').addClass('step-pass fill-step-progress');
                     ftStepEl.addClass('step-pass');
@@ -278,7 +395,6 @@
                 }
                 else
                 {
-                    $scope.changelistItems.findChangelist('_id', changelistId).activity.status = status;
                     buildStepEl.removeClass('step-active fill-step-progress').addClass('step-fail fill-step-progress');
                     utStepEl.removeClass('step-active fill-step-progress').addClass('step-fail fill-step-progress');
                     ftStepEl.addClass('step-fail');
