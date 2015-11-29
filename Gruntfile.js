@@ -77,7 +77,7 @@ module.exports = function(grunt) {
             },
             scripts: {
                 files: {
-                    'public/js/dist/script.min.js': ['public/js/src/script.js']
+                    'public/js/dist/app.min.js': ['public/js/src/app.js']
                 }
             }
         },
