@@ -80,12 +80,23 @@ module.exports = function(grunt) {
                     'public/js/dist/script.min.js': ['public/js/src/script.js']
                 }
             }
+        },
+
+        watch: {
+            css: {
+                files: ['public/scss/**/*.scss'],
+                tasks: ['compass:devbuild'],
+                options: {
+                    livereload: true
+                }
+            }
         }
     });
 
     /* Load tasks */
 	grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     /* Register tasks */
 
@@ -93,7 +104,7 @@ module.exports = function(grunt) {
 	 * Default task, runs Compass in developer mode and
 	 * watches for changes SASS files to compile them to CSS upon every modification.
 	 */
-	grunt.registerTask('default', ['compass:dev']);
+	grunt.registerTask('default', ['watch']);
 
     /**
 	 * Developer Build task;
