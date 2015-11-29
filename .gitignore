@@ -28,3 +28,4 @@ node_modules
 .sass-cache
 *.map
 public/css/util/*.css
+public/css/widgets/*.css
