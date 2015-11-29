@@ -1,1 +1,595 @@
-body{background-color:#F2EDE4}#wrapper{padding-left:0;-webkit-transition:all 0.5s ease;-moz-transition:all 0.5s ease;-ms-transition:all 0.5s ease;-o-transition:all 0.5s ease;transition:all 0.5s ease}#wrapper.toggled{padding-left:250px}#wrapper.toggled #sidebar-wrapper{width:250px}#wrapper.toggled #page-content-wrapper{position:absolute;margin-right:-250px}#sidebar-wrapper{position:fixed;left:250px;width:0;height:100%;margin-left:-250px;overflow-y:auto;background:#11538C;z-index:1000;-webkit-transition:all 0.5s ease;-moz-transition:all 0.5s ease;-ms-transition:all 0.5s ease;-o-transition:all 0.5s ease;transition:all 0.5s ease}#page-content-wrapper{position:absolute;width:100%;padding:15px}.sidebar-nav{position:absolute;top:0;width:250px;margin:0;padding:0;list-style:none}.sidebar-nav li{text-indent:20px;line-height:40px}.sidebar-nav li a{display:block;text-decoration:none;color:#F2EDE4}.sidebar-nav li a:hover{text-decoration:none;color:#fff;background:#049DBF}.sidebar-nav li a:active,.sidebar-nav li a:focus{text-decoration:none}.sidebar-nav>.sidebar-brand{height:65px;font-size:26px;line-height:60px}.sidebar-nav>.sidebar-brand a{color:#F2EDE4}.sidebar-nav>.sidebar-brand a:hover{color:#F2EDE4;background:none}.show-menu{font-size:18px}.show-menu:hover{cursor:pointer}.changelist{width:100%;margin-top:20px;padding-left:0;list-style:none}.changelist .changelist-prop{display:inline-block;float:left}.changelist .list-header:after,.changelist .list-item:after{content:".";display:block;height:0;clear:both;visibility:hidden}* html .changelist .list-header,* html .changelist .list-item{height:1px}.changelist .list-header .changelist-prop,.changelist .list-item .changelist-prop{background:white}.changelist .list-header .changelist-title,.changelist .list-item .changelist-title{width:15%}.changelist .list-header .changelist-owner,.changelist .list-header .changelist-status,.changelist .list-item .changelist-owner,.changelist .list-item .changelist-status{width:12.5%}.changelist .list-header .changelist-timestart,.changelist .list-item .changelist-timestart{width:15%}.changelist .list-empty:after{content:".";display:block;height:0;clear:both;visibility:hidden}* html .changelist .list-empty{height:1px}.changelist .list-empty .changelist-empty{width:100%;padding:10px 12px;text-align:center;background:white;color:#999}.changelist .list-header{border-color:#DADADA;border-style:solid;border-width:2px 2px 0 6px}.changelist .list-header .changelist-prop{padding:10px 12px;font-weight:bold;text-align:center;color:#6D6D6D}.changelist .list-header .changelist-build,.changelist .list-header .changelist-unittest,.changelist .list-header .changelist-functionaltest{width:15%}.changelist .list-item{border-top:1px solid #DADADA}.changelist .list-item.item-pending{border-left:6px solid #F8AC59}.changelist .list-item.item-pending .changelist-prop.changelist-status{color:#F8AC59}.changelist .list-item.item-active{border-left:6px solid #1C84C6}.changelist .list-item.item-active .changelist-prop.changelist-status{color:#1C84C6}.changelist .list-item.item-pass{border-left:6px solid #1AB394}.changelist .list-item.item-pass .changelist-prop.changelist-status{color:#1AB394}.changelist .list-item.item-fail{border-left:6px solid #ED5565}.changelist .list-item.item-fail .changelist-prop.changelist-status{color:#ED5565}.changelist .list-item .changelist-prop{padding:15px 12px;text-align:center;font-size:12px;color:#989898}.changelist .list-item .changelist-prop.changelist-timestart{padding-left:0;padding-right:0}.changelist .list-item .changelist-prop .glyphicon{margin:0 5px}.changelist .list-item .changelist-build-progress{width:45%}@media screen and (min-width: 71.9375em){#wrapper{padding-left:250px}#wrapper.toggled{padding-left:0}#wrapper.toggled #sidebar-wrapper{width:0}#wrapper.toggled #page-content-wrapper{position:relative;margin-right:0}#sidebar-wrapper{width:250px}#page-content-wrapper{padding:20px;position:relative}#page-content-wrapper .show-menu{display:none}}
+@charset "UTF-8";
+/**
+ * sivart-ci v0.1.0
+ *
+ * A simple interactive CI Dashboard built on MEAN stack.
+ *
+ * Author: Kushal Pandya <kushalspandya@gmail.com> (https://doublslash.com)
+ * Date: 28 November, 2015
+ *
+ * Sivart Main Stylesheet.
+ */
+/**
+ * sivart-ci v0.1.0
+ *
+ * A simple interactive CI Dashboard built on MEAN stack.
+ *
+ * Author: Kushal Pandya <kushalspandya@gmail.com> (https://doublslash.com)
+ * Date: 28 November, 2015
+ *
+ * SASS Mixins.
+ */
+/*
+ * Clearfix for floating element containers.
+ */
+/*
+ * Vendor prefixed Box Shadow.
+ */
+/*
+ * Vendor prefixed Border Radius.
+ */
+/*
+ * Vendor prefixed Linear Gradient.
+ */
+/*
+ * Vendor prefixed Transitions.
+ */
+/*
+ * Vendor prefixed Box Sizing.
+ */
+/*
+ * vendor specific vertical align.
+ */
+/**
+ * sivart-ci v0.1.0
+ *
+ * A simple interactive CI Dashboard built on MEAN stack.
+ *
+ * Author: Kushal Pandya <kushalspandya@gmail.com> (https://doublslash.com)
+ * Date: 28 November, 2015
+ *
+ * Sivart Colors.
+ */
+/**
+ * sivart-ci v0.1.0
+ *
+ * A simple interactive CI Dashboard built on MEAN stack.
+ *
+ * Author: Kushal Pandya <kushalspandya@gmail.com> (https://doublslash.com)
+ * Date: 28 November, 2015
+ *
+ * Simple Sidebar Bootstrap Theme (https://github.com/IronSummitMedia/startbootstrap-simple-sidebar).
+ */
+/**
+ * sivart-ci v0.1.0
+ *
+ * A simple interactive CI Dashboard built on MEAN stack.
+ *
+ * Author: Kushal Pandya <kushalspandya@gmail.com> (https://doublslash.com)
+ * Date: 28 November, 2015
+ *
+ * SASS Mixins.
+ */
+/*
+ * Clearfix for floating element containers.
+ */
+/*
+ * Vendor prefixed Box Shadow.
+ */
+/*
+ * Vendor prefixed Border Radius.
+ */
+/*
+ * Vendor prefixed Linear Gradient.
+ */
+/*
+ * Vendor prefixed Transitions.
+ */
+/*
+ * Vendor prefixed Box Sizing.
+ */
+/*
+ * vendor specific vertical align.
+ */
+/**
+ * sivart-ci v0.1.0
+ *
+ * A simple interactive CI Dashboard built on MEAN stack.
+ *
+ * Author: Kushal Pandya <kushalspandya@gmail.com> (https://doublslash.com)
+ * Date: 28 November, 2015
+ *
+ * Sivart Colors.
+ */
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+#wrapper.toggled {
+  padding-left: 250px;
+}
+#wrapper.toggled #sidebar-wrapper {
+  width: 250px;
+}
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -250px;
+}
+
+#sidebar-wrapper {
+  position: fixed;
+  left: 250px;
+  width: 0;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #11538C;
+  z-index: 1000;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#page-content-wrapper {
+  position: absolute;
+  width: 100%;
+  padding: 15px;
+}
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
+}
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #F2EDE4;
+}
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: white;
+  background: #049DBF;
+}
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+  text-decoration: none;
+}
+.sidebar-nav > .sidebar-brand {
+  height: 65px;
+  font-size: 26px;
+  line-height: 60px;
+}
+.sidebar-nav > .sidebar-brand a {
+  color: #F2EDE4;
+}
+.sidebar-nav > .sidebar-brand a:hover {
+  color: #F2EDE4;
+  background: none;
+}
+
+.show-menu {
+  font-size: 18px;
+}
+.show-menu:hover {
+  cursor: pointer;
+}
+
+@media screen and (min-width: 71.9375em) {
+  #wrapper {
+    padding-left: 250px;
+  }
+  #wrapper.toggled {
+    padding-left: 0;
+  }
+  #wrapper.toggled #sidebar-wrapper {
+    width: 0;
+  }
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+
+  #sidebar-wrapper {
+    width: 250px;
+  }
+
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
+  #page-content-wrapper .show-menu {
+    display: none;
+  }
+}
+/**
+ * sivart-ci v0.1.0
+ *
+ * A simple interactive CI Dashboard built on MEAN stack.
+ *
+ * Author: Kushal Pandya <kushalspandya@gmail.com> (https://doublslash.com)
+ * Date: 28 November, 2015
+ *
+ * Step Bar Progress Bar for Bootstrap (http://bootsnipp.com/snippets/gjm35).
+ */
+/**
+ * sivart-ci v0.1.0
+ *
+ * A simple interactive CI Dashboard built on MEAN stack.
+ *
+ * Author: Kushal Pandya <kushalspandya@gmail.com> (https://doublslash.com)
+ * Date: 28 November, 2015
+ *
+ * SASS Mixins.
+ */
+/*
+ * Clearfix for floating element containers.
+ */
+/*
+ * Vendor prefixed Box Shadow.
+ */
+/*
+ * Vendor prefixed Border Radius.
+ */
+/*
+ * Vendor prefixed Linear Gradient.
+ */
+/*
+ * Vendor prefixed Transitions.
+ */
+/*
+ * Vendor prefixed Box Sizing.
+ */
+/*
+ * vendor specific vertical align.
+ */
+/**
+ * sivart-ci v0.1.0
+ *
+ * A simple interactive CI Dashboard built on MEAN stack.
+ *
+ * Author: Kushal Pandya <kushalspandya@gmail.com> (https://doublslash.com)
+ * Date: 28 November, 2015
+ *
+ * Sivart Colors.
+ */
+@keyframes active-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(36deg);
+  }
+  20% {
+    transform: rotate(72deg);
+  }
+  30% {
+    transform: rotate(108deg);
+  }
+  40% {
+    transform: rotate(144deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  60% {
+    transform: rotate(216deg);
+  }
+  70% {
+    transform: rotate(252deg);
+  }
+  80% {
+    transform: rotate(288deg);
+  }
+  90% {
+    transform: rotate(324deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.step-bar-progress {
+  width: 100%;
+  height: 100%;
+}
+
+.progress-steps {
+  list-style: none;
+  margin-bottom: 0;
+  padding: 0;
+}
+.progress-steps:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+* html .progress-steps {
+  height: 1px;
+}
+.progress-steps .step-item {
+  position: relative;
+  display: inline-block;
+  float: left;
+}
+.progress-steps .step-item .step-icon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 9px auto !important;
+  color: white;
+}
+.progress-steps .step-item:before {
+  content: " ";
+  display: inline-block;
+  height: 32px;
+  width: 32px;
+  background-color: #E4E4E7;
+  border: 5px solid #E4E4E7;
+  z-index: 100;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+.progress-steps .step-item.step-first, .progress-steps .step-item.step-middle {
+  margin-right: 30%;
+}
+.progress-steps .step-item.step-first:after, .progress-steps .step-item.step-middle:after {
+  content: " ";
+  position: absolute;
+  display: inline-block;
+  top: 30%;
+  left: 85%;
+  width: 410%;
+  height: 11px;
+  background-color: #E4E4E7;
+  border-top: 3px solid #E4E4E7;
+  border-bottom: 3px solid #E4E4E7;
+  background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 0%, transparent 5%, rgba(255, 255, 255, 0.2) 10%, transparent 15%, rgba(255, 255, 255, 0.2) 20%, transparent 25%, rgba(255, 255, 255, 0.2) 30%, transparent 35%, rgba(255, 255, 255, 0.2) 40%, transparent 45%, rgba(255, 255, 255, 0.2) 50%, transparent 55%, rgba(255, 255, 255, 0.2) 60%, transparent 65%, rgba(255, 255, 255, 0.2) 70%, transparent 75%, rgba(255, 255, 255, 0.2) 80%, transparent 85%, rgba(255, 255, 255, 0.2) 90%, transparent 95%, rgba(255, 255, 255, 0.2) 100%);
+  background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 0%, transparent 5%, rgba(255, 255, 255, 0.2) 10%, transparent 15%, rgba(255, 255, 255, 0.2) 20%, transparent 25%, rgba(255, 255, 255, 0.2) 30%, transparent 35%, rgba(255, 255, 255, 0.2) 40%, transparent 45%, rgba(255, 255, 255, 0.2) 50%, transparent 55%, rgba(255, 255, 255, 0.2) 60%, transparent 65%, rgba(255, 255, 255, 0.2) 70%, transparent 75%, rgba(255, 255, 255, 0.2) 80%, transparent 85%, rgba(255, 255, 255, 0.2) 90%, transparent 95%, rgba(255, 255, 255, 0.2) 100%);
+  background-image: -ms-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 0%, transparent 5%, rgba(255, 255, 255, 0.2) 10%, transparent 15%, rgba(255, 255, 255, 0.2) 20%, transparent 25%, rgba(255, 255, 255, 0.2) 30%, transparent 35%, rgba(255, 255, 255, 0.2) 40%, transparent 45%, rgba(255, 255, 255, 0.2) 50%, transparent 55%, rgba(255, 255, 255, 0.2) 60%, transparent 65%, rgba(255, 255, 255, 0.2) 70%, transparent 75%, rgba(255, 255, 255, 0.2) 80%, transparent 85%, rgba(255, 255, 255, 0.2) 90%, transparent 95%, rgba(255, 255, 255, 0.2) 100%);
+  background-image: -o-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 0%, transparent 5%, rgba(255, 255, 255, 0.2) 10%, transparent 15%, rgba(255, 255, 255, 0.2) 20%, transparent 25%, rgba(255, 255, 255, 0.2) 30%, transparent 35%, rgba(255, 255, 255, 0.2) 40%, transparent 45%, rgba(255, 255, 255, 0.2) 50%, transparent 55%, rgba(255, 255, 255, 0.2) 60%, transparent 65%, rgba(255, 255, 255, 0.2) 70%, transparent 75%, rgba(255, 255, 255, 0.2) 80%, transparent 85%, rgba(255, 255, 255, 0.2) 90%, transparent 95%, rgba(255, 255, 255, 0.2) 100%);
+  background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0) 5%, rgba(255, 255, 255, 0.2) 10%, rgba(0, 0, 0, 0) 15%, rgba(255, 255, 255, 0.2) 20%, rgba(0, 0, 0, 0) 25%, rgba(255, 255, 255, 0.2) 30%, rgba(0, 0, 0, 0) 35%, rgba(255, 255, 255, 0.2) 40%, rgba(0, 0, 0, 0) 45%, rgba(255, 255, 255, 0.2) 50%, rgba(0, 0, 0, 0) 55%, rgba(255, 255, 255, 0.2) 60%, rgba(0, 0, 0, 0) 65%, rgba(255, 255, 255, 0.2) 70%, rgba(0, 0, 0, 0) 75%, rgba(255, 255, 255, 0.2) 80%, rgba(0, 0, 0, 0) 85%, rgba(255, 255, 255, 0.2) 90%, rgba(0, 0, 0, 0) 95%, rgba(255, 255, 255, 0.2) 100%);
+  -webkit-transition: all, 1s, ease;
+  -moz-transition: all, 1s, ease;
+  -ms-transition: all, 1s, ease;
+  -o-transition: all, 1s, ease;
+  transition: all, 1s, ease;
+  z-index: 200;
+}
+.progress-steps .step-item.step-pending:before {
+  background-color: #F8AC59;
+}
+.progress-steps .step-item .step-icon-pending:before {
+  content: "";
+}
+.progress-steps .step-item.step-active:before {
+  background-color: #1C84C6;
+}
+.progress-steps .step-item .step-icon-active:before {
+  animation: active-spin 1s infinite;
+  content: "";
+}
+.progress-steps .step-item.step-fail:before {
+  background-color: #ED5565;
+}
+.progress-steps .step-item .step-icon-fail:before {
+  content: "";
+}
+.progress-steps .step-item.step-pass:before {
+  background-color: #1AB394;
+}
+.progress-steps .step-item .step-icon-pass:before {
+  content: "";
+}
+.progress-steps .step-item.fill-step-progress.step-fail:after {
+  background-color: #ED5565;
+}
+.progress-steps .step-item.fill-step-progress.step-pass:after {
+  background-color: #1AB394;
+}
+.progress-steps .step-item.fill-step-progress.step-active:after {
+  background-color: #1C84C6;
+}
+
+body {
+  background-color: #F2EDE4;
+}
+
+.changelist {
+  width: 100%;
+  margin-top: 20px;
+  padding-left: 0;
+}
+.changelist .list-header .changelist-prop,
+.changelist .list-item .changelist-prop {
+  background: white;
+}
+.changelist .list-header .changelist-title,
+.changelist .list-item .changelist-title {
+  width: 15%;
+}
+.changelist .list-header .changelist-owner,
+.changelist .list-header .changelist-status,
+.changelist .list-item .changelist-owner,
+.changelist .list-item .changelist-status {
+  width: 12.5%;
+}
+.changelist .list-header .changelist-timestart,
+.changelist .list-item .changelist-timestart {
+  width: 15%;
+}
+.changelist .list-empty .changelist-empty {
+  width: 100%;
+  padding: 10px 12px;
+  text-align: center;
+  background: white;
+  color: #999;
+}
+.changelist .list-header {
+  border-color: #D2D2D2;
+  border-style: solid;
+  border-width: 2px 2px 1px 6px;
+}
+.changelist .list-header .changelist-prop {
+  padding: 10px 12px;
+  font-weight: bold;
+  text-align: center;
+  color: #6D6D6D;
+}
+.changelist .list-header .changelist-build,
+.changelist .list-header .changelist-unittest,
+.changelist .list-header .changelist-functionaltest {
+  width: 15%;
+}
+.changelist .list-item.item-pass:hover, .changelist .list-item.item-fail:hover {
+  cursor: pointer;
+}
+.changelist .list-item.item-pass:hover .changelist-prop, .changelist .list-item.item-fail:hover .changelist-prop {
+  background-color: #F9F9F9;
+}
+.changelist .list-item.expanded {
+  border-top: 3px solid;
+}
+.changelist .list-item.expanded.item-pass {
+  border-color: #1AB394;
+  border-left-color: #D2D2D2;
+}
+.changelist .list-item.expanded.item-fail {
+  border-color: #ED5565;
+  border-left-color: #D2D2D2;
+}
+.changelist .list-item.expanded .short-message {
+  display: none;
+}
+.changelist .list-item.expanded .long-message {
+  display: block;
+  font-size: 22px;
+}
+.changelist .list-item.expanded .changelist-status {
+  background-color: #F7F7F7;
+  border-top: 2px solid #E4E4E7;
+  border-left: 2px solid #E4E4E7;
+}
+.changelist .list-item.expanded.item-pass:hover .changelist-prop.changelist-status, .changelist .list-item.expanded.item-fail:hover .changelist-prop.changelist-status {
+  background-color: #F7F7F7;
+}
+.changelist .list-item.item-pending {
+  border-left: 6px solid #F8AC59;
+}
+.changelist .list-item.item-pending .changelist-prop.changelist-status {
+  color: #F8AC59;
+}
+.changelist .list-item.item-active {
+  border-left: 6px solid #1C84C6;
+}
+.changelist .list-item.item-active .changelist-prop.changelist-status {
+  color: #1C84C6;
+}
+.changelist .list-item.item-pass {
+  border-left: 6px solid #1AB394;
+}
+.changelist .list-item.item-pass .changelist-prop.changelist-status {
+  color: #1AB394;
+}
+.changelist .list-item.item-fail {
+  border-left: 6px solid #ED5565;
+}
+.changelist .list-item.item-fail .changelist-prop.changelist-status {
+  color: #ED5565;
+}
+.changelist .list-item .long-message {
+  display: none;
+}
+.changelist .list-item .changelist-prop {
+  height: 65px;
+  text-align: center;
+  font-size: 12px;
+  color: #989898;
+}
+.changelist .list-item .changelist-prop.changelist-timestart {
+  padding-left: 0;
+  padding-right: 0;
+}
+.changelist .list-item .changelist-prop.changelist-build-progress {
+  padding: 15px 0 0 6%;
+}
+.changelist .list-item .changelist-prop .glyphicon {
+  margin: 0 5px;
+}
+.changelist .list-item .changelist-build-progress {
+  width: 45%;
+}
+.changelist .list-item-seperator {
+  height: 1px;
+  background-color: #D2D2D2;
+}
+.changelist .list-item-details {
+  border-left: 6px solid #D2D2D2;
+}
+.changelist .list-item-details .changelist-details {
+  display: none;
+  height: 110px;
+  width: 100%;
+  background: white;
+  border-top: 1px solid #D2D2D2;
+}
+
+.changelist .list-item-details .details-field {
+  display: inline-block;
+  float: left;
+  height: 100%;
+  color: #989898;
+}
+.changelist .list-item-details .build-status {
+  width: 10%;
+  padding: 20px 5px;
+  font-size: 12px;
+}
+.changelist .list-item-details .build-status > span {
+  display: block;
+  text-align: center;
+}
+.changelist .list-item-details .build-status > span.status-message {
+  padding-left: 15px;
+}
+.changelist .list-item-details .build-status > span.status-time {
+  margin-top: 10px;
+}
+.changelist .list-item-details .build-status > span .glyphicon {
+  margin: 0 5px;
+}
+.changelist .list-item-details.item-fail .build-status .status-message .glyphicon {
+  color: #ED5565;
+}
+.changelist .list-item-details.item-pass .build-status .status-message .glyphicon {
+  color: #1AB394;
+}
+
+/**
+ * Smartphones Portrait Mode.
+ */
+/**
+ * Smartphones Landscape.
+ */
+/**
+ * Tablet Landscape and Portrait Mode.
+ */
+/**
+ * Large Screens and Beyond.
+ */
+
+/*# sourceMappingURL=styles.css.map */

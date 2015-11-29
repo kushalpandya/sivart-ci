@@ -13,113 +13,20 @@
 @import "util/Mixins";
 @import "util/Colors";
 
+@import "widgets/SimpleSidebar";
+@import "widgets/StepBar";
+
 body {
     background-color: $ceramic_white;
-}
-
-#wrapper {
-    padding-left: 0;
-    @include transition(all 0.5s ease);
-
-    &.toggled {
-        padding-left: 250px;
-
-        #sidebar-wrapper {
-            width: 250px;
-        }
-
-        #page-content-wrapper {
-            position: absolute;
-            margin-right: -250px;
-        }
-    }
-}
-
-#sidebar-wrapper {
-    position: fixed;
-    left: 250px;
-    width: 0;
-    height: 100%;
-    margin-left: -250px;
-    overflow-y: auto;
-    background: $blue_1;
-    z-index: 1000;
-
-    @include transition(all 0.5s ease);
-}
-
-#page-content-wrapper {
-    position: absolute;
-    width: 100%;
-    padding: 15px;
-}
-
-.sidebar-nav {
-    position: absolute;
-    top: 0;
-    width: 250px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-
-    li {
-        text-indent: 20px;
-        line-height: 40px;
-
-        a {
-           display: block;
-           text-decoration: none;
-           color: $ceramic_white;
-
-            &:hover {
-                text-decoration: none;
-                color: #fff;
-                background: $blue_3;
-            }
-
-            &:active,
-            &:focus {
-                text-decoration: none;
-            }
-        }
-    }
-
-    > .sidebar-brand {
-        height: 65px;
-        font-size: 26px;
-        line-height: 60px;
-
-        a {
-            color: $ceramic_white;
-
-            &:hover {
-                color: $ceramic_white;
-                background: none;
-            }
-        }
-    }
-}
-
-.show-menu {
-    font-size: 18px;
-
-    @include hover;
 }
 
 .changelist {
     width: 100%;
     margin-top: 20px;
     padding-left: 0;
-    list-style: none;
-
-    .changelist-prop {
-        display: inline-block;
-        float: left;
-    }
 
     .list-header,
     .list-item {
-        @include clearfix;
 
         .changelist-prop {
             background: white;
@@ -140,7 +47,6 @@ body {
     }
 
     .list-empty {
-        @include clearfix;
 
         .changelist-empty {
             width: 100%;
@@ -154,7 +60,7 @@ body {
     .list-header {
         border-color: $gray;
         border-style: solid;
-        border-width: 2px 2px 0 6px;
+        border-width: 2px 2px 1px 6px;
 
         .changelist-prop {
             padding: 10px 12px;
@@ -171,13 +77,61 @@ body {
     }
 
     .list-item {
-        border-top: 1px solid $gray;
 
         @mixin highlight-style($color: transparent) {
             border-left: 6px solid $color;
 
             .changelist-prop.changelist-status {
                 color: $color;
+            }
+        }
+
+        &.item-pass,
+        &.item-fail {
+            &:hover {
+                cursor: pointer;
+
+                .changelist-prop {
+                    background-color: #F9F9F9;
+                }
+            }
+        }
+
+        &.expanded {
+            border-top: 3px solid;
+
+            &.item-pass {
+                border-color: $status_pass;
+                border-left-color: $gray;
+            }
+
+            &.item-fail {
+                border-color: $status_fail;
+                border-left-color: $gray;
+            }
+
+            .short-message {
+                display: none;
+            }
+
+            .long-message {
+                display: block;
+                font-size: 22px;
+            }
+
+            .changelist-status {
+                background-color: #F7F7F7;
+                border-top: 2px solid $light_gray;
+                border-left: 2px solid $light_gray;
+            }
+
+            &.item-pass,
+            &.item-fail {
+                &:hover {
+                    .changelist-prop.changelist-status {
+                        background-color: #F7F7F7;
+                    }
+                }
             }
         }
 
@@ -197,15 +151,23 @@ body {
             @include highlight-style($status_fail);
         }
 
+        .long-message {
+            display: none;
+        }
+
         .changelist-prop {
-            padding: 15px 12px;
+            height: 65px;
             text-align: center;
             font-size: 12px;
-            color: #989898;
+            color: $dark_gray;
 
             &.changelist-timestart {
                 padding-left: 0;
                 padding-right: 0;
+            }
+
+            &.changelist-build-progress {
+                padding: 15px 0 0 6%;
             }
 
             .glyphicon {
@@ -215,6 +177,73 @@ body {
 
         .changelist-build-progress {
             width: 45%;
+        }
+    }
+
+    .list-item-seperator {
+        height: 1px;
+        background-color: $gray;
+    }
+
+    .list-item-details {
+        border-left: 6px solid $gray;
+
+        .changelist-details {
+            display: none;
+            height: 110px;
+            width: 100%;
+            background: white;
+            border-top: 1px solid $gray;
+        }
+    }
+}
+
+.changelist {
+
+    .list-item-details {
+
+        .details-field {
+            display: inline-block;
+            float: left;
+            height: 100%;
+            color: $dark_gray;
+        }
+
+        .build-status {
+            width: 10%;
+            padding: 20px 5px;
+            font-size: 12px;
+
+            > span {
+                display: block;
+                text-align: center;
+
+                &.status-message {
+                    padding-left: 15px;
+                }
+
+                &.status-time {
+                    margin-top: 10px;
+                }
+
+                .glyphicon {
+                    margin: 0 5px;
+                }
+            }
+        }
+
+        &.item-fail {
+
+            .build-status .status-message .glyphicon {
+                color: $status_fail;
+            }
+        }
+
+        &.item-pass {
+
+            .build-status .status-message .glyphicon {
+                color: $status_pass;
+            }
         }
     }
 }
@@ -241,34 +270,4 @@ body {
  * Large Screens and Beyond.
  */
 @media screen and (min-width: 71.9375em) {
-
-    #wrapper {
-        padding-left: 250px;
-
-        &.toggled {
-            padding-left: 0;
-
-            #sidebar-wrapper {
-                width: 0;
-            }
-
-            #page-content-wrapper {
-                position: relative;
-                margin-right: 0;
-            }
-        }
-    }
-
-    #sidebar-wrapper {
-        width: 250px;
-    }
-
-    #page-content-wrapper {
-        padding: 20px;
-        position: relative;
-
-        .show-menu {
-            display: none;
-        }
-    }
 }
