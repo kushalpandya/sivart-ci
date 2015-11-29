@@ -29,7 +29,8 @@ changelistMonitor = function(sivartApp) {
             if (changelists &&
                 changelists.length)
             {
-                io.emit('buildstart', changelistId);
+
+                io.emit('buildstart', changelistId, (new Date()).getTime());
 
                 changelists.forEach(function(changelistItem) {
                     buildItemCount++;
@@ -38,7 +39,11 @@ changelistMonitor = function(sivartApp) {
                         var utItemCount = 0;
 
                         changelistItem.build.timeCompleted = (new Date()).getTime();
-                        io.emit('buildfinished', changelistId, buildItemCount === 2 ? -1 : 1);
+                        io.emit('buildfinished',
+                                    changelistId,
+                                    buildItemCount === 2 ? -1 : 1,
+                                    changelistItem.build.timeCompleted
+                                );
 
                         if (buildItemCount !== 2)
                         {
@@ -48,7 +53,14 @@ changelistMonitor = function(sivartApp) {
                                 var ftItemCount = 0;
 
                                 changelistItem.build.timeCompleted = (new Date()).getTime();
-                                io.emit('unittestfinished', changelistId, buildItemCount === 3 ? -1 : 1);
+                                changelistItem.unitTest.passCount = 276;
+                                changelistItem.unitTest.duration = changelistItem.build.timeCompleted - changelistItem.timeStarted;
+                                io.emit('unittestfinished',
+                                            changelistId,
+                                            buildItemCount === 3 ? -1 : 1,
+                                            changelistItem.build.timeCompleted,
+                                            changelistItem.unitTest.passCount
+                                        );
 
                                 if (buildItemCount !== 3)
                                 {
@@ -56,7 +68,14 @@ changelistMonitor = function(sivartApp) {
                                     ftItemCount++;
                                     setTimeout(function(changelistId, utItemCount) {
                                         changelistItem.build.timeCompleted = (new Date()).getTime();
-                                        io.emit('functionaltestfinished', changelistId, buildItemCount === 4 ? -1 : 1);
+                                        changelistItem.functionalTest.passCount = 13375;
+                                        changelistItem.functionalTest.duration = changelistItem.build.timeCompleted - changelistItem.timeStarted;
+                                        io.emit('functionaltestfinished',
+                                                    changelistId,
+                                                    buildItemCount === 4 ? -1 : 1,
+                                                    changelistItem.build.timeCompleted,
+                                                    changelistItem.functionalTest.passCount
+                                                );
                                     }, ftItemCount * 5000, changelistId, buildItemCount);
                                 }
                             }, utItemCount * 5000, changelistId, buildItemCount);
