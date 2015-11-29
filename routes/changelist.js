@@ -36,6 +36,7 @@ router.get('/changelists', function(req, res) {
         if (err)
             res.send(err);
 
+        req.app.set('changelists', changelists);
         res.json(changelists);
     });
 });
@@ -48,6 +49,23 @@ router.get('/changelist/:changeListId', function(req, res) {
             res.send(err);
 
         res.json(changelist);
+    });
+});
+
+// @PUT
+// Update Changelist by ID.
+router.put('/changelist/:changeListId', function(req, res) {
+    var updatedChangelist = req.body;
+
+    ChangelistModel.findByIdAndUpdate(req.params.changeListId, updatedChangelist, function (err, changelist) {
+        if (err)
+            res.send(err);
+
+        res.json({
+            status: 1,
+            id: changelist.id,
+            changeListName: changelist.changeListName
+        });
     });
 });
 
