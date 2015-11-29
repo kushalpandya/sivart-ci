@@ -10,12 +10,7 @@
  */
 
 $(document).ready(function() {
-    var pageLocation = window.location,
-        socketListenerPort = 3000,
-        btnShowMenu = $('#btnShowMenu'),
-        socket;
-
-    socket = io.connect(pageLocation.protocol + '//' + pageLocation.hostname + ':' + socketListenerPort);
+    var btnShowMenu = $('#btnShowMenu');
 
     btnShowMenu.on('click', function(e) {
         e.preventDefault();
