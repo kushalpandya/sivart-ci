@@ -8,12 +8,3 @@
  *
  * Sivart Main Script.
  */
-
-$(document).ready(function() {
-    var btnShowMenu = $('#btnShowMenu');
-
-    btnShowMenu.on('click', function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-});
