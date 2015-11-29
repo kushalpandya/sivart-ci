@@ -10,11 +10,13 @@
  */
 
 @import "compass";
+@import "compass/css3";
 @import "util/Mixins";
 @import "util/Colors";
 
 @import "widgets/SimpleSidebar";
 @import "widgets/StepBar";
+@import "widgets/CSSPieCharts";
 
 body {
     background-color: $ceramic_white;
@@ -141,6 +143,12 @@ body {
 
         &.item-active {
             @include highlight-style($status_active);
+
+            .changelist-status .short-message {
+                .glyphicon {
+                    animation: active-spin 1s infinite;
+                }
+            }
         }
 
         &.item-pass {
@@ -232,42 +240,171 @@ body {
             }
         }
 
+        .build-directories {
+            width: 15%;
+            padding: 20px 10px;
+
+            .directory-build,
+            .directory-release {
+                display: inline-block;
+
+                > .glyphicon {
+                    display: block;
+                    font-size: 36px;
+                    color: $status_pass;
+                }
+
+                a {
+                    display: block;
+                    margin-top: 3px;
+                    text-align: center;
+                    font-size: 12px;
+                }
+            }
+
+            .directory-build {
+                float: left;
+            }
+
+            .directory-release {
+                float: right;
+
+                > .glyphicon {
+                    margin: 0 5px;
+                }
+            }
+        }
+
+        .build-ut-status,
+        .build-ft-status {
+            width: 32%;
+            padding: 18px 0;
+
+            .test-meta,
+            .css-pie,
+            .chart-legend {
+                display: inline-block;
+                float: left;
+            }
+
+            .test-meta {
+                width: 45%;
+
+                .test-status {
+                    display: block;
+
+                    .glyphicon {
+                        margin: 0 5px;
+                    }
+                }
+
+                .test-score {
+                    font-size: 22px;
+                    font-weight: bold;
+                }
+
+                .test-reason {
+                    float: left;
+
+                    .cause-message {
+                        color: $status_fail;
+                        font-size: 16px;
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            .css-pie {
+                width: 70px;
+                line-height: 70px;
+            }
+
+            .chart-legend {
+                width: 15%;
+                padding: 0;
+                margin-left: 20px;
+                list-style-type: none;
+
+                .total-tests,
+                .failed-tests {
+                    position: relative;
+                }
+
+                .total-tests:before,
+                .failed-tests:before {
+                    content: '';
+                    position: absolute;
+                    display: inline-block;
+                    top: 8px;
+                    left: -10px;
+                    height: 6px;
+                    width: 6px;
+                }
+
+                .total-tests:before {
+                    background-color: $status_pass;
+                }
+
+                .failed-tests:before {
+                    background-color: $status_pending;
+                }
+
+                .test-duration:before {
+                    margin-left: -14px;
+                    margin-right: 2px;
+                }
+            }
+        }
+
+        .build-seperator {
+            width: 5%;
+
+            .glyphicon {
+                padding: 0 10px;
+                font-size: 20px;
+                line-height: 105px;
+            }
+        }
+
         &.item-fail {
 
-            .build-status .status-message .glyphicon {
+            .build-status .status-message .glyphicon,
+            .build-directories .directory-release > .glyphicon,
+            .test-meta .test-status > .glyphicon,
+            .test-meta .test-score {
                 color: $status_fail;
             }
         }
 
         &.item-pass {
 
-            .build-status .status-message .glyphicon {
+            .build-status .status-message .glyphicon,
+            .test-meta .test-status > .glyphicon,
+            .test-meta .test-score {
                 color: $status_pass;
             }
         }
     }
 }
 
-/**
- * Smartphones Portrait Mode.
- */
-@media screen and (max-width: 24.0625em) {
-}
+.author-info {
+    list-style: none;
+    padding: 0;
 
-/**
- * Smartphones Landscape.
- */
-@media screen and (min-width: 24.125em) and (max-width: 71.9374em) {
-}
+    .author {
+        font-size: 14px;
+        color: $gray;
+    }
 
-/**
- * Tablet Landscape and Portrait Mode.
- */
-@media screen and (min-width: 46.876em) and (max-width: 71.9374em) {
-}
+    .author-title {
+        font-size: 20px;
+    }
 
-/**
- * Large Screens and Beyond.
- */
-@media screen and (min-width: 71.9375em) {
+    .author-designation {
+        font-size: 16px;
+    }
+
+    .author-links {
+        font-size: 14px;
+    }
 }
