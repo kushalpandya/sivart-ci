@@ -165,7 +165,7 @@ $glyphicon-fail: "\e101";
     .step-item-last .step-body:before {
         content: " ";
         position: absolute;
-        top: 5px;
+        top: calc(50% - 6px);
         height: 11px;
         width: 6px;
         background-color: $light_gray;
@@ -176,14 +176,14 @@ $glyphicon-fail: "\e101";
     .step-item-first,
     .step-item-middle {
          .step-body:after {
-            left: 22px;
+            left: 100%;
         }
     }
 
     .step-item-middle,
     .step-item-last {
          .step-body:before {
-            right: 22px;
+            right: 100%;
         }
     }
 }
