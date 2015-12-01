@@ -159,33 +159,31 @@ $glyphicon-fail: "\e101";
         }
     }
 
+    .step-item-first .step-body:after,
+    .step-item-middle .step-body:after,
+    .step-item-middle .step-body:before,
+    .step-item-last .step-body:before {
+        content: " ";
+        position: absolute;
+        top: 5px;
+        height: 11px;
+        width: 6px;
+        background-color: $light_gray;
+        border-top: 3px solid $light_gray;
+        border-bottom: 3px solid $light_gray;
+    }
+
     .step-item-first,
     .step-item-middle {
          .step-body:after {
-            content: " ";
-            position: absolute;
-            top: 5px;
             left: 22px;
-            height: 11px;
-            width: 5px;
-            background-color: $light_gray;
-            border-top: 3px solid $light_gray;
-            border-bottom: 3px solid $light_gray;
         }
     }
 
     .step-item-middle,
     .step-item-last {
          .step-body:before {
-            content: " ";
-            position: absolute;
-            top: 5px;
             right: 22px;
-            height: 11px;
-            width: 5px;
-            background-color: $light_gray;
-            border-top: 3px solid $light_gray;
-            border-bottom: 3px solid $light_gray;
         }
     }
 }
