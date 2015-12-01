@@ -65,19 +65,34 @@
                                     <td class="changelist-prop changelist-owner">{{ changelist.owner }}</td>
                                     <td class="changelist-prop changelist-timestart" ng-bind-html="getTimeStarted(changelist.timeStarted)"></td>
                                     <td class="changelist-prop changelist-build-progress" colspan="3">
-                                        <div class="step-bar-progress">
-                                            <ul class="progress-steps">
-                                                <li class="step-item step-first step-pending buildStep">
-                                                    <span class="step-icon step-icon-pending glyphicon"></span>
-                                                </li>
-                                                <li class="step-item step-middle step-empty utStep">
-                                                    <span class="step-icon glyphicon"></span>
-                                                </li>
-                                                <li class="step-item step-last step-empty ftStep">
-                                                    <span class="step-icon glyphicon"></span>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        <table class="stepbar-progress" data-current-step="1" data-step-status="pending">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="step-item step-item-first" data-step="1">
+                                                        <span class="step-body">
+                                                            <span class="glyphicon"></span>
+                                                        </span>
+                                                    </td>
+                                                    <td class="step-item-progress">
+                                                        <span class="progress-body">
+                                                        </span>
+                                                    </td>
+                                                    <td class="step-item step-item-middle" data-step="2">
+                                                        <span class="step-body">
+                                                            <span class="glyphicon"></span>
+                                                        </span>
+                                                    </td>
+                                                    <td class="step-item-progress">
+                                                        <span class="progress-body"></span>
+                                                    </td>
+                                                    <td class="step-item step-item-last" data-step="3">
+                                                        <span class="step-body">
+                                                            <span class="glyphicon"></span>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </td>
                                     <td class="changelist-prop changelist-status" ng-bind-html="getStatus(changelist.activity.status)"></td>
                                 </tr>
