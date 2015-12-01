@@ -175,11 +175,14 @@ body {
             }
 
             &.changelist-build-progress {
-                padding: 15px 0 0 6%;
+                padding: 0 6% 0 6%;
             }
 
-            .glyphicon {
-                margin: 0 5px;
+            &.changelist-status {
+
+                .glyphicon {
+                    margin: 0 5px;
+                }
             }
         }
 
@@ -299,6 +302,7 @@ body {
                 }
 
                 .test-score {
+                    display: block;
                     font-size: 22px;
                     font-weight: bold;
                 }
