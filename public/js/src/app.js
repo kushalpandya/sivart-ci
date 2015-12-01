@@ -285,7 +285,7 @@
 
             socket.on('buildstart', function(changelistId, timeStarted) {
                 var changeListItemEl = $('tr#' + changelistId),
-                    buildStepEl = $('tr#' + changelistId).find('.progress-steps .buildStep'),
+                    changeListProgressEl = changeListItemEl.find('.stepbar-progress'),
                     changeListItem;
 
                 console.log('Build started for Changelist ', $scope.changelistItems.findChangelist('_id', changelistId).changeListName);
@@ -293,13 +293,14 @@
                 changeListItem = $scope.changelistItems.findChangelist('_id', changelistId);
                 changeListItem.timeStarted = timeStarted;
                 changeListItem.activity.status = 2;
-                buildStepEl.removeClass('step-pending').addClass('step-active');
-                buildStepEl.find('.step-icon').removeClass('step-icon-pending').addClass('step-icon-active');
+                $scope.$apply();
+                changeListProgressEl.attr('data-current-step', 1);
+                changeListProgressEl.attr('data-step-status', 'active');
             });
 
             socket.on('buildfinished', function(changelistId, status, timeCompleted) {
                 var changeListItemEl = $('tr#' + changelistId),
-                    buildStepEl = changeListItemEl.find('.progress-steps .buildStep'),
+                    changeListProgressEl = changeListItemEl.find('.stepbar-progress'),
                     changeListItem;
 
                 console.log('Build finished for Changelist ', $scope.changelistItems.findChangelist('_id', changelistId).changeListName, ' with status ', status);
@@ -309,33 +310,32 @@
                 changeListItem.build.timeCompleted = timeCompleted;
 
                 if (status === 1)
-                    buildStepEl.find('.step-icon').removeClass('step-icon-active').addClass('step-icon-pass');
+                {
+                    changeListProgressEl.attr('data-current-step', 1);
+                    changeListProgressEl.attr('data-step-status', 'pass');
+                }
                 else
                 {
                     changeListItem.activity.status = status;
-                    buildStepEl.removeClass('step-active').addClass('step-fail');
-                    buildStepEl.find('.step-icon').removeClass('step-icon-active').addClass('step-icon-fail');
+                    $scope.$apply();
+                    changeListProgressEl.attr('data-current-step', 1);
+                    changeListProgressEl.attr('data-step-status', 'fail');
                 }
             });
 
             socket.on('unitteststart', function(changelistId) {
                 var changeListItemEl = $('tr#' + changelistId),
-                    buildStepEl = changeListItemEl.find('.progress-steps .buildStep'),
-                    utStepEl = changeListItemEl.find('.progress-steps .utStep');
+                    changeListProgressEl = changeListItemEl.find('.stepbar-progress');
 
                 console.log('Unit Tests started for Changelist ', $scope.changelistItems.findChangelist('_id', changelistId).changeListName);
 
-                buildStepEl.addClass('fill-step-progress');
-                $timeout(function() {
-                    utStepEl.removeClass('step-empty').addClass('step-active');
-                    utStepEl.find('.step-icon').addClass('step-icon-active');
-                }, 1000);
+                changeListProgressEl.attr('data-current-step', 2);
+                changeListProgressEl.attr('data-step-status', 'active');
             });
 
             socket.on('unittestfinished', function(changelistId, status, timeCompleted, passCount) {
                 var changeListItemEl = $('tr#' + changelistId),
-                    buildStepEl = changeListItemEl.find('.progress-steps .buildStep'),
-                    utStepEl = changeListItemEl.find('.progress-steps .utStep'),
+                    changeListProgressEl = changeListItemEl.find('.stepbar-progress'),
                     changeListItem;
 
                 changeListItem = $scope.changelistItems.findChangelist('_id', changelistId);
@@ -345,40 +345,35 @@
                 changeListItem.build.timeCompleted = timeCompleted;
 
                 if (status === 1)
-                    utStepEl.find('.step-icon').removeClass('step-icon-active').addClass('step-icon-pass');
+                {
+                    changeListProgressEl.attr('data-current-step', 2);
+                    changeListProgressEl.attr('data-step-status', 'pass');
+                }
                 else
                 {
                     changeListItem.activity.status = status;
-                    utStepEl.removeClass('step-active').addClass('step-fail');
-                    buildStepEl.removeClass('step-active fill-step-progress').addClass('step-fail fill-step-progress');
-                    $timeout(function() {
-                        utStepEl.find('.step-icon').removeClass('step-icon-active').addClass('step-icon-fail');
-                    }, 1000);
+                    $scope.$apply();
+                    changeListProgressEl.attr('data-current-step', 2);
+                    changeListProgressEl.attr('data-step-status', 'fail');
                 }
             });
 
             socket.on('functionalteststart', function(changelistId) {
                 var changeListItemEl = $('tr#' + changelistId),
-                    buildStepEl = changeListItemEl.find('.progress-steps .buildStep'),
-                    utStepEl = changeListItemEl.find('.progress-steps .utStep'),
-                    ftStepEl = changeListItemEl.find('.progress-steps .ftStep');
+                    changeListProgressEl = changeListItemEl.find('.stepbar-progress');
 
-                utStepEl.addClass('fill-step-progress');
-                $timeout(function() {
-                    ftStepEl.removeClass('step-empty').addClass('step-active');
-                    ftStepEl.find('.step-icon').addClass('step-icon-active');
-                }, 1000);
+                changeListProgressEl.attr('data-current-step', 3);
+                changeListProgressEl.attr('data-step-status', 'active');
             });
 
             socket.on('functionaltestfinished', function(changelistId, status, timeCompleted, passCount) {
                 var changeListItemEl = $('tr#' + changelistId),
-                    buildStepEl = changeListItemEl.find('.progress-steps .buildStep'),
-                    utStepEl = changeListItemEl.find('.progress-steps .utStep'),
-                    ftStepEl = changeListItemEl.find('.progress-steps .ftStep'),
+                    changeListProgressEl = changeListItemEl.find('.stepbar-progress'),
                     changeListItem;
 
                 changeListItem = $scope.changelistItems.findChangelist('_id', changelistId);
                 changeListItem.activity.status = status;
+                $scope.$apply();
                 changeListItem.activity.phase = 3;
                 changeListItem.functionalTest.duration = timeCompleted - changeListItem.timeStarted;
                 changeListItem.functionalTest.passCount = passCount;
@@ -386,21 +381,13 @@
 
                 if (status === 1)
                 {
-                    buildStepEl.removeClass('step-active fill-step-progress').addClass('step-pass fill-step-progress');
-                    utStepEl.removeClass('step-active fill-step-progress').addClass('step-pass fill-step-progress');
-                    ftStepEl.addClass('step-pass');
-                    $timeout(function() {
-                        ftStepEl.find('.step-icon').removeClass('step-icon-active').addClass('step-icon-pass');
-                    }, 1000);
+                    changeListProgressEl.attr('data-current-step', 3);
+                    changeListProgressEl.attr('data-step-status', 'pass');
                 }
                 else
                 {
-                    buildStepEl.removeClass('step-active fill-step-progress').addClass('step-fail fill-step-progress');
-                    utStepEl.removeClass('step-active fill-step-progress').addClass('step-fail fill-step-progress');
-                    ftStepEl.addClass('step-fail');
-                    $timeout(function() {
-                        ftStepEl.find('.step-icon').removeClass('step-icon-active').addClass('step-icon-fail');
-                    }, 1000);
+                    changeListProgressEl.attr('data-current-step', 3);
+                    changeListProgressEl.attr('data-step-status', 'fail');
                 }
             });
         };
