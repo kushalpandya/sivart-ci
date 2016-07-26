@@ -31,17 +31,8 @@ $glyphicon-pass: "\e013";
 $glyphicon-fail: "\e101";
 
 @keyframes active-spin {
-    0% {transform: rotate(0deg);}
-    10% {transform: rotate(36deg);}
-    20% {transform: rotate(72deg);}
-    30% {transform: rotate(108deg);}
-    40% {transform: rotate(144deg);}
-    50% {transform: rotate(180deg);}
-    60% {transform: rotate(216deg);}
-    70% {transform: rotate(252deg);}
-    80% {transform: rotate(288deg);}
-    90% {transform: rotate(324deg);}
-    100% {transform: rotate(360deg);}
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .stepbar-progress {
@@ -194,12 +185,14 @@ $glyphicon-fail: "\e101";
         .step-item[data-step="#{$step}"] .step-body {
             background-color: $status-color;
 
-            .glyphicon:before {
-                content: $status-icon;
-
+            .glyphicon {
                 @if $animate == true
                 {
-                    animation: active-spin 1s infinite;
+                    animation: active-spin infinite 1s linear;
+                }
+
+                &:before {
+                    content: $status-icon;
                 }
             }
         }
